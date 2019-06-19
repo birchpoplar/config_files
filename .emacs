@@ -29,7 +29,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Ubuntu Mono" :foundry "DAMA" :slant normal :weight normal :height 158 :width normal))))
+ '(default ((t (:family "Menlo" :slant normal :weight normal :height 138 :width normal))))
  '(org-agenda-structure ((t (:background "#073642" :foreground "#93a1a1" :inverse-video nil :box (:line-width 2 :color "#002b36") :underline nil :slant normal :weight bold :height 1.0))))
  '(org-document-title ((t (:foreground "#93a1a1" :weight bold :height 1.0))))
  '(org-level-1 ((t (:inherit nil :foreground "#cb4b16" :height 1.0))))
@@ -163,7 +163,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (doom-modeline magit undo-tree yasnippet-snippets yasnippet solarized-theme flycheck ## auto-complete))))
+    (flycheck-haskell doom-modeline magit undo-tree yasnippet-snippets yasnippet solarized-theme flycheck ## auto-complete))))
 
 ;; enable auto-complete-mode (think this is what this does...)
 (ac-config-default)
