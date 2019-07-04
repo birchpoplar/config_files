@@ -51,7 +51,8 @@
 			("~/org/"
 			 "~/org/projects/"
 			 "~/org/boards/"
-			 "~/org/clients/")))
+			 "~/org/clients/"
+			 "~/org/properties/")))
 
 ;; FROM Organize your life in Plain Text!!
 ;; ==============================================================================
@@ -389,9 +390,14 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
 (setq org-agenda-start-on-weekday 1)
 
 ;; Enable display of the time grid so we can see the marker for the current time
-(setq org-agenda-time-grid (quote ((daily today remove-match)
-                                   #("----------------" 0 16 (org-heading t))
-                                   (0900 1100 1300 1500 1700))))
+;; (setq org-agenda-time-grid (quote ((daily today remove-match)
+;;                                    #("----------------" 0 16 (org-heading t))
+;;                                    (0900 1100 1300 1500 1700))))
+;; ADDED 6/25 - due to error on Mac (commented out the above)
+(setq org-agenda-time-grid (quote 
+                             ((daily today remove-match)
+                              (0900 1100 1300 1500 1700)                                   
+                              "......" "----------------")))
 
 ;; Display tags farther right
 (setq org-agenda-tags-column -102)
@@ -671,6 +677,8 @@ Late deadlines first, then scheduled, then non-late deadlines"
 
 (setq org-stuck-projects (quote ("" nil nil "")))
 
+; Overwrite the current window with the agenda
+(setq org-agenda-window-setup 'current-window)
 
 ;; ==============================================================================
 ;; END OF ORGANIZE IN PLAIN LIFE
@@ -681,9 +689,18 @@ Late deadlines first, then scheduled, then non-late deadlines"
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+;; '(org-agenda-files
+;;   (quote
+;;    ("/Users/johnniewalker/org/computing.org" "/Users/johnniewalker/org/projects.org" "/Users/johnniewalker/org/refile.org" "/Users/johnniewalker/org/tcfo.org" "/Users/johnniewalker/org/tobuy.org" "/Users/johnniewalker/org/todo.org" "/Users/johnniewalker/org/projects/24pa_projects.org" "/Users/johnniewalker/org/projects/osr_projects.org" "/Users/johnniewalker/org/boards/acny.org" "/Users/johnniewalker/org/boards/gcnyc.org")))
  '(package-selected-packages
    (quote
     (flycheck-haskell doom-modeline magit undo-tree yasnippet-snippets yasnippet solarized-theme flycheck ## auto-complete))))
+
+;; Found this on 7/3/19 - think duplicate of above - so commented out
+;;(setq org-agenda-files (quote ("~/org"
+;;                               "~/org/projects"
+;;                               "~/org/clients"
+;;			       "~/org/boards")))
 
 ;; enable auto-complete-mode (think this is what this does...)
 (ac-config-default)
