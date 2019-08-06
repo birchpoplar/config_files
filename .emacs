@@ -680,6 +680,14 @@ Late deadlines first, then scheduled, then non-late deadlines"
 ; Overwrite the current window with the agenda
 (setq org-agenda-window-setup 'current-window)
 
+;; Include agenda archive files when searching for things
+(setq org-agenda-text-search-extra-files (quote (agenda-archives)))
+
+
+;; archiving set-up
+(setq org-archive-mark-done nil)
+(setq org-archive-location "%s_archive::* Archived Tasks")
+
 ;; ==============================================================================
 ;; END OF ORGANIZE IN PLAIN LIFE
 ;; ==============================================================================
