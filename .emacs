@@ -680,11 +680,8 @@ Late deadlines first, then scheduled, then non-late deadlines"
 ; Overwrite the current window with the agenda
 (setq org-agenda-window-setup 'current-window)
 
-;; Include agenda archive files when searching for things
-(setq org-agenda-text-search-extra-files (quote (agenda-archives)))
 
-
-;; archiving set-up
+;; Set archiving
 (setq org-archive-mark-done nil)
 (setq org-archive-location "%s_archive::* Archived Tasks")
 
@@ -697,12 +694,9 @@ Late deadlines first, then scheduled, then non-late deadlines"
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-;; '(org-agenda-files
-;;   (quote
-;;    ("/Users/johnniewalker/org/computing.org" "/Users/johnniewalker/org/projects.org" "/Users/johnniewalker/org/refile.org" "/Users/johnniewalker/org/tcfo.org" "/Users/johnniewalker/org/tobuy.org" "/Users/johnniewalker/org/todo.org" "/Users/johnniewalker/org/projects/24pa_projects.org" "/Users/johnniewalker/org/projects/osr_projects.org" "/Users/johnniewalker/org/boards/acny.org" "/Users/johnniewalker/org/boards/gcnyc.org")))
  '(package-selected-packages
    (quote
-    (flycheck-haskell doom-modeline magit undo-tree yasnippet-snippets yasnippet solarized-theme flycheck ## auto-complete))))
+    (org-journal flycheck-haskell doom-modeline magit undo-tree yasnippet-snippets yasnippet solarized-theme flycheck ## auto-complete))))
 
 ;; Found this on 7/3/19 - think duplicate of above - so commented out
 ;;(setq org-agenda-files (quote ("~/org"
@@ -745,6 +739,14 @@ Late deadlines first, then scheduled, then non-late deadlines"
 ;; doom-modeline
 (require 'doom-modeline)
 (doom-modeline-mode 1)
+
+;; include org-journal mode
+(require 'org-journal)
+(setq org-journal-dir "~/org/journal/")
+
+;; suppress warnings for yasnippet buffer changes
+(require 'warnings)
+(add-to-list 'warning-suppress-types '(yasnippet backquote-change))
 
 (provide '.emacs)
 ;;; .emacs ends here
