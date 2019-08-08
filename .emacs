@@ -543,33 +543,32 @@ Late deadlines first, then scheduled, then non-late deadlines"
               ("h" "Habit" entry (file "~/org/refile.org")
                "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
 
-;; set window size
-(add-to-list 'default-frame-alist '(height . 60))
-(add-to-list 'default-frame-alist '(width . 140))
-
 ; Targets include this file and any file contributing to the agenda - up to 9 levels deep
 (setq org-refile-targets (quote ((nil :maxlevel . 9)
                                  (org-agenda-files :maxlevel . 9))))
 
-; Use full outline paths for refile targets - we file directly with IDO
-(setq org-refile-use-outline-path t)
+;; commenting out IDO - for Helm
+;; JW 8/8/19
 
-; Targets complete directly with IDO
-(setq org-outline-path-complete-in-steps nil)
+;; Use full outline paths for refile targets - we file directly with IDO
+; (setq org-refile-use-outline-path t)
 
-; Allow refile to create parent tasks with confirmation
-(setq org-refile-allow-creating-parent-nodes (quote confirm))
+;; Targets complete directly with IDO
+; (setq org-outline-path-complete-in-steps nil)
 
-; Use IDO for both buffer and file completion and ido-everywhere to t
-(setq org-completion-use-ido t)
-(setq ido-everywhere t)
-(setq ido-max-directory-size 100000)
-(ido-mode (quote both))
-; Use the current window when visiting files and buffers with ido
-(setq ido-default-file-method 'selected-window)
-(setq ido-default-buffer-method 'selected-window)
-; Use the current window for indirect buffer display
-(setq org-indirect-buffer-display 'current-window)
+;; Allow refile to create parent tasks with confirmation
+; (setq org-refile-allow-creating-parent-nodes (quote confirm))
+
+;; Use IDO for both buffer and file completion and ido-everywhere to t
+; (setq org-completion-use-ido t)
+; (setq ido-everywhere t)
+; (setq ido-max-directory-size 100000)
+; (ido-mode (quote both))
+;; Use the current window when visiting files and buffers with ido
+; (setq ido-default-file-method 'selected-window)
+; (setq ido-default-buffer-method 'selected-window)
+;; Use the current window for indirect buffer display
+; (setq org-indirect-buffer-display 'current-window)
 
 ;;;; Refile settings
 ; Exclude DONE state tasks from refile targets
@@ -696,7 +695,7 @@ Late deadlines first, then scheduled, then non-late deadlines"
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (org-journal flycheck-haskell doom-modeline magit undo-tree yasnippet-snippets yasnippet solarized-theme flycheck ## auto-complete))))
+    (helm org-ref org-journal flycheck-haskell doom-modeline magit undo-tree yasnippet-snippets yasnippet solarized-theme flycheck ## auto-complete))))
 
 ;; Found this on 7/3/19 - think duplicate of above - so commented out
 ;;(setq org-agenda-files (quote ("~/org"
@@ -734,7 +733,7 @@ Late deadlines first, then scheduled, then non-late deadlines"
 (global-set-key [f8] 'neotree-toggle)
 
 ;; Magit settings
-(global-set-key (kbd "C-x g") 'magit-staus)
+(global-set-key (kbd "C-x g") 'magit-status)
 
 ;; doom-modeline
 (require 'doom-modeline)
@@ -747,6 +746,36 @@ Late deadlines first, then scheduled, then non-late deadlines"
 ;; suppress warnings for yasnippet buffer changes
 (require 'warnings)
 (add-to-list 'warning-suppress-types '(yasnippet backquote-change))
+
+;; add Helm
+;; default is from emacs-helm.sh from standard install
+
+(setq package-load-list '((helm-core t) (helm t) (async t) (popup t)))
+(package-initialize)
+(add-to-list 'load-path (file-name-directory (file-truename "$0")))
+(setq default-frame-alist '((vertical-scroll-bars . nil)
+                            (tool-bar-lines . 0)
+                            (menu-bar-lines . 0)
+                            (fullscreen . nil)))
+(blink-cursor-mode -1)
+(require 'helm-config)
+(helm-mode 1)
+(define-key global-map [remap find-file] 'helm-find-files)
+(define-key global-map [remap occur] 'helm-occur)
+(define-key global-map [remap list-buffers] 'helm-buffers-list)
+(define-key global-map [remap dabbrev-expand] 'helm-dabbrev)
+(define-key global-map [remap execute-extended-command] 'helm-M-x)
+(unless (boundp 'completion-in-region-function)
+  (define-key lisp-interaction-mode-map [remap completion-at-point] 'helm-lisp-completion-at-point)
+  (define-key emacs-lisp-mode-map       [remap completion-at-point] 'helm-lisp-completion-at-point))
+(add-hook 'kill-emacs-hook #'(lambda () (and (file-exists-p "$CONF_FILE") (delete-file "$CONF_FILE"))))
+
+;; soft word wrap
+(setq org-startup-truncated nil)
+
+;; set window size
+(add-to-list 'default-frame-alist '(height . 60))
+(add-to-list 'default-frame-alist '(width . 140))
 
 (provide '.emacs)
 ;;; .emacs ends here
