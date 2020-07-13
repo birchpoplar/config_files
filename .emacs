@@ -1,4 +1,5 @@
 
+
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
@@ -693,6 +694,8 @@ Late deadlines first, then scheduled, then non-late deadlines"
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-journal-dir "~/org/journal/")
+ '(org-journal-file-type (quote monthly))
  '(package-selected-packages
    (quote
     (helm org-ref org-journal flycheck-haskell doom-modeline magit undo-tree yasnippet-snippets yasnippet solarized-theme flycheck ## auto-complete))))
@@ -743,6 +746,7 @@ Late deadlines first, then scheduled, then non-late deadlines"
 (require 'org-journal)
 (setq org-journal-dir "~/org/journal/")
 
+
 ;; suppress warnings for yasnippet buffer changes
 (require 'warnings)
 (add-to-list 'warning-suppress-types '(yasnippet backquote-change))
@@ -774,7 +778,7 @@ Late deadlines first, then scheduled, then non-late deadlines"
 (setq org-startup-truncated nil)
 
 ;; set window size
-(add-to-list 'default-frame-alist '(height . 60))
+(add-to-list 'default-frame-alist '(height . 50))
 (add-to-list 'default-frame-alist '(width . 140))
 
 (provide '.emacs)
